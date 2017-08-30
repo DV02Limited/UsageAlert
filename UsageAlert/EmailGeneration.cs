@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace UsageAlert
 {
-    enum Customers { DV02, Grunenthal, OPEL, OPUK, Cleanbrite, Nordea };
+    enum Customers { DV02, Grunenthal, Cleanbrite, Nordea };
 
     public class EmailGeneration
     {
@@ -32,12 +32,6 @@ namespace UsageAlert
                         break;
                     case Customers.Grunenthal:
                         CustomerEmail = "uk.ithelpdesk@grunenthal.com";
-                        break;
-                    case Customers.OPEL:
-                        CustomerEmail = "itsupport@otsuka-europe.com";
-                        break;
-                    case Customers.OPUK:
-                        CustomerEmail = "itsupport@otsuka-europe.com";
                         break;
                     case Customers.Cleanbrite:
                         CustomerEmail = "customercare@cleanbrite.co.uk";

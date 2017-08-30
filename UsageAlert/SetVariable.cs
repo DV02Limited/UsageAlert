@@ -41,7 +41,7 @@ namespace UsageAlert
 
         private string CreateCustomer(string emailBody)
         {
-            Match match = new Regex("Cost Centre:\\s+(.*) > >").Match(new HtmlToText().ConvertHtml(emailBody)); // Find customer from received Daisy email
+            Match match = new Regex("Cost Centre:\\s+(.*)] has exceeded").Match(new HtmlToText().ConvertHtml(emailBody)); // Find customer from received Daisy email
             if (match.Success)
                 return match.Groups[1].Value; //return customer name back to MiCC Enterprise
             return "Error";
@@ -49,7 +49,7 @@ namespace UsageAlert
 
         private string CreateUsageType(string emailBody)
         {
-            Match match = new Regex("Usage Alert - (.*)").Match(new HtmlToText().ConvertHtml(emailBody)); // Get usage alert type from received Daisy email
+            Match match = new Regex("Usage Alert\\s+(.*) has been triggered").Match(new HtmlToText().ConvertHtml(emailBody)); // Get usage alert type from received Daisy email
             if (match.Success)
                 return match.Groups[1].Value; // Send back to MiCC Enterprise if usage alert if either cost or data
             return "Error";
