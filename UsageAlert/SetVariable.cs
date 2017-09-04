@@ -80,9 +80,9 @@ namespace UsageAlert
         {
             try
             {
-                return (Decimal.Parse(new Regex("exceeded\\s£(.\\d+\\..\\d+)").Match(new HtmlToText().ConvertHtml(emailBody)).Groups[1].Value) * new Decimal(2)).ToString();
+                return (Decimal.Parse(new Regex("exceeded\\s£(.\\d*\\..\\d+)").Match(new HtmlToText().ConvertHtml(emailBody)).Groups[1].Value) * new Decimal(2)).ToString();
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
                 return "0.00";
             }

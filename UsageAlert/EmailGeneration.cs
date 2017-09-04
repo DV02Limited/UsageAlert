@@ -7,8 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace UsageAlert
 {
-    enum Customers { DV02, Grunenthal, Cleanbrite, Nordea };
-
+    
     public class EmailGeneration
     {
         public static string CustomerEmail { get; set; }
@@ -25,19 +24,22 @@ namespace UsageAlert
             try
             {
                 //Set customer enail address defined on contents of CKeyResult
-                switch (Enum.Parse(typeof(Customers), args[4]))
+                switch (args[4])
                 {
-                    case Customers.DV02:
+                    case "DV02":
                         CustomerEmail = "hdcalls@dv02.co.uk";
                         break;
-                    case Customers.Grunenthal:
+                    case "Grunenthal":
                         CustomerEmail = "uk.ithelpdesk@grunenthal.com";
                         break;
-                    case Customers.Cleanbrite:
+                    case "Cleanbrite":
                         CustomerEmail = "customercare@cleanbrite.co.uk";
                         break;
-                    case Customers.Nordea:
+                    case "Nordea Bank":
                         CustomerEmail = "dlldlondonit@nordea.com";
+                        break;
+                    case "DWA Claims Ltd":
+                        CustomerEmail = "ashley@dwaclaims.co.uk";
                         break;
                     default:
                         CustomerEmail = null;
