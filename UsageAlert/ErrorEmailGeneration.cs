@@ -7,16 +7,16 @@ namespace UsageAlert
     {
         public int Result { get; }
 
-        public ErrorEmailGeneration(string emailBody)
+        public ErrorEmailGeneration(string emailBody, string p)
         {
-            Result = CreateErrorEmail(emailBody);
+            Result = CreateErrorEmail(emailBody, p);
         }
 
-        private int CreateErrorEmail(string emailBody)
+        private int CreateErrorEmail(string emailBody, string p)
         {
             try
             {
-                MailMessage msg = new MailMessage("noreply@dv02.co.uk", "hdcalls@dv02.co.uk")
+                MailMessage msg = new MailMessage(from: "donotreply@dv02.co.uk", to: "hdcalls@dv02.co.uk")
                 {
                     Subject = "Mobile Usage Alert Discrepancy",
                     Body = emailBody,
@@ -26,14 +26,17 @@ namespace UsageAlert
                 //Define SMTP Connection
                 SmtpClient client = new SmtpClient()
                 {
-                    Port = 25,
+                    Port = 587,
+                    EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Host = "dv02-co-uk.mail.protection.outlook.com"
+                    //UseDefaultCredentials = true,
+                    Credentials = new System.Net.NetworkCredential("solidus1@dv02.co.uk", p),
+                    Host = "smtp.office365.com"
                 };
 
                 // Send email
                 client.Send(msg);
+                msg.Dispose();
                 return 0;
             }
             catch (ArgumentException e)
